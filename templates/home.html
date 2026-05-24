@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="text-center mb-4">All Reports</h2>
+
+<div class="row">
+{% for report in reports %}
+    <div class="col-md-4 mb-4">
+        <div class="card p-3 shadow-sm border-0" style="border-radius:15px;">
+
+            <h5 class="text-primary">{{ report.report_type }}</h5>
+
+            <p><strong>Location:</strong> {{ report.location }}</p>
+            <p>{{ report.description }}</p>
+
+            <p>
+                <strong>Status:</strong>
+                <span class="badge bg-info">{{ report.status }}</span>
+            </p>
+
+            <p>
+                <strong>Priority:</strong>
+                <span class="badge bg-warning text-dark">
+                    {{ report.priority }}
+                </span>
+            </p>
+
+            <!-- ✅ Admin Reply (INSIDE LOOP) -->
+            {% if report.admin_reply %}
+                <div class="alert alert-info mt-2">
+                    <strong>Admin Reply:</strong><br>
+                    {{ report.admin_reply }}
+                </div>
+            {% endif %}
+
+            <a href="{% url 'report_detail' report.id %}" 
+               class="btn btn-outline-primary mt-2">
+               View Details
+            </a>
+
+            {% if report.image %}
+                <img src="{{ report.image.url }}" 
+                     class="img-fluid rounded mt-3" 
+                     style="height:200px; object-fit:cover;">
+            {% endif %}
+
+        </div>
+    </div>
+{% empty %}
+    <p class="text-center">No reports yet.</p>
+{% endfor %}
+</div>
+
+{% endblock %}

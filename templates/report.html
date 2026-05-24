@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Submit Report</h2>
+
+<form method="post" enctype="multipart/form-data" class="card p-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Submit</button>
+</form>
+{% if report.image %}
+    <img src="{{ report.image.url }}" class="img-fluid">
+{% endif %}
+
+{% endblock %}

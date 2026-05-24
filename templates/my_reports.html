@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="text-white mb-4">My Reports</h2>
+
+<div class="row">
+{% for report in reports %}
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>{{ report.report_type }}</h5>
+            <p><strong>Location:</strong> {{ report.location }}</p>
+            <p>{{ report.description }}</p>
+            <p><strong>Status:</strong> {{ report.status }}</p>
+
+            {% if report.admin_reply %}
+                <div class="alert alert-info mt-2">
+                    <strong>Admin Reply:</strong><br>
+                    {{ report.admin_reply }}
+                </div>
+            {% endif %}
+
+            {% if report.image %}
+                <img src="{{ report.image.url }}" class="img-fluid mt-2">
+            {% endif %}
+        </div>
+    </div>
+{% empty %}
+    <p class="text-white">No reports yet.</p>
+{% endfor %}
+</div>
+
+{% endblock %}

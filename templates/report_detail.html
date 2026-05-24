@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card p-4 mt-4">
+    <h3>{{ report.report_type }}</h3>
+    <p><strong>Location:</strong> {{ report.location }}</p>
+    <p><strong>Description:</strong> {{ report.description }}</p>
+    <p><strong>Status:</strong> {{ report.status }}</p>
+    <p><strong>Priority:</strong> {{ report.priority }}</p>
+
+    {% if report.image %}
+        <img src="{{ report.image.url }}" class="img-fluid mt-3">
+    {% endif %}
+
+    {% if report.admin_reply %}
+        <div class="alert alert-info mt-3">
+            <strong>Admin Reply:</strong><br>
+            {{ report.admin_reply }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

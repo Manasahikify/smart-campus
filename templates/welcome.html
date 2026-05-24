@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+/* 🌈 Background */
+body {
+    background: linear-gradient(135deg, #4facfe, #7f53ac, #ff6ec4);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* Card */
+.welcome-card {
+    background: rgba(255, 255, 255, 0.722);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
+
+/* Logo */
+.logo {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn-custom {
+    padding: 12px 25px;
+    border-radius: 30px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    transform: scale(1.1);
+}
+
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height:80vh;">
+
+    <div class="welcome-card">
+
+        <!-- LOGO -->
+        <img src="{% static 'logo.png' %}" class="logo">
+
+        <!-- TITLE -->
+        <div class="title">Smart Campus</div>
+
+        <!-- COLLEGE -->
+        <p>Malnad College of Engineering, Hassan</p>
+
+        <p>Lost & Found and Campus Issue Reporting System</p>
+
+        <!-- LOGIC -->
+        {% if user.is_authenticated %}
+
+            <!-- COMMON BUTTON -->
+            <a href="{% url 'home' %}" class="btn btn-light btn-custom">
+                📋 View Reports
+            </a>
+
+            <!-- USER VIEW -->
+            {% if not user.is_superuser %}
+                <a href="{% url 'my_reports' %}" class="btn btn-success btn-custom">
+                    👤 My Reports
+                </a>
+            {% endif %}
+
+            <!-- ADMIN VIEW -->
+            {% if user.is_superuser %}
+                <a href="{% url 'dashboard' %}" class="btn btn-warning btn-custom">
+                    ⚙ Admin Dashboard
+                </a>
+            {% endif %}
+
+        {% else %}
+
+            <a href="/accounts/login/" class="btn btn-primary btn-custom">
+                🔐 Login
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
