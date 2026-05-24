@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-15^4u=-*f13=_rn)3drh*2ezod7ahly32@l(r6l!c1bf2^o2+_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['smart-campus-rzkn.onrender.com', '127.0.0.1']
 
 
 # Application definition
